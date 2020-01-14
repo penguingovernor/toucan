@@ -39,16 +39,16 @@ Notes:
 
 ### FAQ
 
-* Is this secure?
+Is this secure?
 
 No.
 Toucan is for educational purposes only.
 
-* How does this work?
+How does this work?
 
 Read this [Wiki](https://en.wikipedia.org/wiki/Stream_cipher) page, it can explain it much better than I can!
 
-* What's an IV?
+What's an IV?
 
 An IV or initialization vector allows use to reuse keys.
 It doesn't have to be securely stored and can be sent along with the cipher text.
