@@ -5,7 +5,7 @@ A simple stream cipher for educational purposes only.
 
 ### Universal
 
-Install appropriate version from the [release page](https://github.com/penguingovernor/toucan/releases)
+Install appropriate version from the [release page](https://github.com/penguingovernor/toucan/releases).
 
 ### From source
 
@@ -34,10 +34,10 @@ Flags:
         -h, --help              print this help message.
 
 Notes:
-        If [outputFile is committed] then stdout is used.
+        If [outputFile is omitted] then stdout is used.
 ```
 
-### FAQ
+### F.A.Q.
 
 Is this secure?
 
@@ -50,7 +50,7 @@ Read this [Wiki](https://en.wikipedia.org/wiki/Stream_cipher) page, it can expla
 
 What's an IV?
 
-An IV or initialization vector allows use to reuse keys.
+An IV or initialization vector allows the reuse of keys.
 It doesn't have to be securely stored and can be sent along with the cipher text.
 As long as the IV isn't reused all should be dandy.
 For practical purpose, consider an IV as a secondary key that doesn't have to be secret and must only be used once.

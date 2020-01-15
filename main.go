@@ -9,7 +9,7 @@ import (
 	"github.com/penguingovernor/toucan/cli/commands"
 )
 
-const usage = `toucan - a simple symmetric stream cipher.
+const usage = `toucan - a simple symmetric key stream cipher.
 
 FOR EDUCATIONAL PURPOSES ONLY.
 
@@ -24,7 +24,7 @@ Flags:
 	-h, --help		print this help message.
 
 Notes:
-	If [outputFile is committed] then stdout is used.
+	If [outputFile is omitted] then stdout is used.
 `
 
 func main() {
