@@ -15,7 +15,7 @@ import (
 // The key should be the only thing that is kept secret.
 func Encrypt(data, key, IV io.Reader, output io.Writer) error {
 
-	// Create HMAC and Encyrption Key from IV and key.
+	// Create HMAC and Encryption Key from IV and key.
 	cKey, hKey, err := generateKeys(key, IV)
 	if err != nil {
 		return err
