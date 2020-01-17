@@ -1,5 +1,6 @@
-# toucan
-A simple stream cipher for educational purposes only.
+# ![](https://user-images.githubusercontent.com/13544676/72605461-a96c7880-38d1-11ea-859c-7538f32a1623.png)
+
+Toucan is a simple stream cipher for educational purposes only.
 
 ## Installation
 
@@ -69,11 +70,11 @@ head -c nBytes < /dev/urandom > file.IV
 
 Where I suggest nBytes be one of the following:
 
-64 -- for 512-bit security.
+64 - for 512-bit security.
 
-32 -- for 256-bit security.
+32 - for 256-bit security.
 
-16 -- for 128-bit security.
+16 - for 128-bit security.
 
 Windows:
 
