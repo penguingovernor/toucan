@@ -3,72 +3,81 @@ package toucan
 import (
 	"bytes"
 	"encoding/base64"
+	"strings"
 	"testing"
 )
 
-func TestEncrypt(t *testing.T) {
-	msg := []byte("Hello World\n")
+func TestEncrpt(t *testing.T) {
+	msg := []byte("hi\n")
+	data, key, IV := bytes.NewBuffer(msg), bytes.NewBuffer(msg), bytes.NewBuffer(msg)
+	var out bytes.Buffer
 
 	t.Run("successful encryption", func(t *testing.T) {
-		ct, err := Encrypt(msg, msg, msg)
+		wantBytes, err := base64.StdEncoding.DecodeString("Qe+lqxLDwVdK1jYbrEiHo238CCNJd7vWFO0Fl/5gw1jo1k/yONFJ0II36D2wfTbXbwJeneft4+5MUMlN/GBsHSvWYQ==")
 		if err != nil {
-			t.Fatalf("wanted err == nil, got err = %v", err)
+			t.Fatalf("failed to decode base64 string")
 		}
-		want := "efrjHxns8qKwYtQJolQZdv6+HNRb1teO8xcxM1/3/LKJhsjvfYsXPOZLjXY="
-		wantCT, err := base64.StdEncoding.DecodeString(want)
-		if err != nil {
-			t.Fatalf("wanted err == nil, got err = %v", err)
+
+		if err := Encrypt(data, key, IV, &out); err != nil {
+			t.Fatalf("encryption failed: %v", err)
 		}
-		if !bytes.Equal(wantCT, ct) {
-			t.Fatalf("want != got | %x != %x", ct, wantCT)
+
+		if gotBytes := out.Bytes(); !bytes.Equal(wantBytes, gotBytes) {
+			t.Fatalf("unexpected encryption result, %x != %x", wantBytes, gotBytes)
 		}
 	})
 
 }
 
 func TestDecrypt(t *testing.T) {
-	ct, err := base64.StdEncoding.DecodeString("efrjHxns8qKwYtQJolQZdv6+HNRb1teO8xcxM1/3/LKJhsjvfYsXPOZLjXY=")
+	wantBytes := []byte("hi\n")
+	encryptedBytes, err := base64.StdEncoding.DecodeString("Qe+lqxLDwVdK1jYbrEiHo238CCNJd7vWFO0Fl/5gw1jo1k/yONFJ0II36D2wfTbXbwJeneft4+5MUMlN/GBsHSvWYQ==")
 	if err != nil {
-		t.Fatalf("failed to decode bin string")
+		t.Fatalf("failed to decode base64 string")
 	}
-	msg := []byte("Hello World\n")
+	data, key, IV := bytes.NewBuffer(encryptedBytes), bytes.NewBuffer(wantBytes), bytes.NewBuffer(wantBytes)
+	var out bytes.Buffer
 
 	t.Run("successful decryption", func(t *testing.T) {
-		pt, err := Decrypt(ct, msg, msg)
-		if err != nil {
-			t.Fatalf("wanted err == nil, got err = %v", err)
+
+		if err := Decrypt(data, key, IV, &out); err != nil {
+			t.Fatalf("decryption failed: %v", err)
 		}
 
-		wantPT := []byte("Hello World\n")
-		if !bytes.Equal(pt, wantPT) {
-			t.Fatalf("want != got | %x != %x", pt, wantPT)
+		if gotBytes := out.Bytes(); !bytes.Equal(wantBytes, gotBytes) {
+			t.Fatalf("unexpected encryption result, %x != %x", wantBytes, gotBytes)
 		}
 	})
 
-	t.Run("bad decryption", func(t *testing.T) {
-		_, err := Decrypt(ct, []byte("bad key"), msg)
-		if err == nil {
-			t.Fatalf("wanted err != nil, got err = %v", err)
+	data, key, IV = bytes.NewBuffer(encryptedBytes), bytes.NewBuffer(encryptedBytes), bytes.NewBuffer(encryptedBytes)
+	out.Reset()
+
+	t.Run("unsuccessful decryption", func(t *testing.T) {
+
+		if err := Decrypt(data, key, IV, &out); err == nil {
+			t.Fatalf("decryption succeeded, wanted failure")
 		}
+
 	})
 
 }
 
 func TestEncryptDecrypt(t *testing.T) {
-	msg := []byte("hello there")
-	key := []byte("key")
-	IV := []byte("IV")
+	myMessage := "Hello Gopher!🤩"
+	var encryptionResult bytes.Buffer
+	var decryptionResult bytes.Buffer
 
-	ct, err := Encrypt(msg, key, IV)
+	err := Encrypt(strings.NewReader(myMessage), strings.NewReader(myMessage), strings.NewReader(myMessage), &encryptionResult)
 	if err != nil {
-		t.Fatalf("wanted err == nil | got: %v", err)
-	}
-	pt, err := Decrypt(ct, key, IV)
-	if err != nil {
-		t.Fatalf("wanted err == nil | got: %v", err)
+		t.Fatalf("encryption failed: %v", err)
 	}
 
-	if !bytes.Equal(msg, pt) {
-		t.Fatalf("want != got | %x != %x", ct, pt)
+	err = Decrypt(&encryptionResult, strings.NewReader(myMessage), strings.NewReader(myMessage), &decryptionResult)
+	if err != nil {
+		t.Fatalf("decryption failed: %v", err)
+	}
+
+	if got := decryptionResult.String(); got != myMessage {
+		t.Fatalf("Decrypt(Encrypt()) failed, got %s wanted %s", got, myMessage)
 	}
 }
