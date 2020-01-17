@@ -1,6 +1,10 @@
-# ![](https://user-images.githubusercontent.com/13544676/72605461-a96c7880-38d1-11ea-859c-7538f32a1623.png)
+![](https://user-images.githubusercontent.com/13544676/72605461-a96c7880-38d1-11ea-859c-7538f32a1623.png)
 
 Toucan is a simple stream cipher for educational purposes only.
+
+[![GoDoc](https://godoc.org/github.com/penguingovernor/toucan/crypto/toucan?status.svg)](https://godoc.org/github.com/penguingovernor/toucan/crypto/toucan)
+[![Go Report Card](https://goreportcard.com/badge/github.com/PenguinGovernor/toucan)](https://goreportcard.com/report/github.com/PenguinGovernor/toucan)
+
 
 ## Installation
 
