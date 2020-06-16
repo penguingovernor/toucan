@@ -36,7 +36,7 @@ Install appropriate version from the [release page](https://github.com/penguingo
 
 2. Run go build
 
-`go build`
+`cd cmd && go build`
 
 ### Usage
 
