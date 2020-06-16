@@ -32,11 +32,11 @@ Install appropriate version from the [release page](https://github.com/penguingo
 
 1. Clone the repo
 
-`git clone https://github.com/penguingovernor/toucan.git`
+`git clone https://github.com/penguingovernor/toucan.git toucan`
 
 2. Run go build
 
-`cd cmd && go build`
+`cd toucan/cmd && go build -o toucan`
 
 ### Usage
 
