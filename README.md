@@ -16,6 +16,12 @@ go get github.com/penguingovernor/toucan/crypto
 
 See the above `godoc` badge for the API specification.
 
+To avoid naming conflicts when using this package (which again, you really shouldn't be using this package), import the package under a different name, like so:
+
+```go
+import toucan "github.com/penguingovernor/toucan/crypto"
+```
+
 ## CLI Installation
 
 ### Universal
