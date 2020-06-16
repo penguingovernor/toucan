@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/penguingovernor/toucan/cli/commands"
+	"github.com/penguingovernor/toucan/internal/cli/commands"
 )
 
 const usage = `toucan - a simple symmetric key stream cipher.

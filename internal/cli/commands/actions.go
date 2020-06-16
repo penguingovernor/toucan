@@ -1,8 +1,6 @@
 package commands
 
-import (
-	"github.com/penguingovernor/toucan/crypto/toucan"
-)
+import toucan "github.com/penguingovernor/toucan/crypto"
 
 func encrypt(arg Argument) error {
 	err := toucan.Encrypt(arg.dataFile, arg.keyFile, arg.ivFile, arg.output)
