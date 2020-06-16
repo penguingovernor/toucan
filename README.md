@@ -1,12 +1,22 @@
 ![](https://user-images.githubusercontent.com/13544676/72605461-a96c7880-38d1-11ea-859c-7538f32a1623.png)
 
 Toucan is a simple stream cipher for educational purposes only.
+It is both a CLI and a library.
 
-[![GoDoc](https://godoc.org/github.com/penguingovernor/toucan/crypto/toucan?status.svg)](https://godoc.org/github.com/penguingovernor/toucan/crypto/toucan)
+[![GoDoc](https://godoc.org/github.com/penguingovernor/toucan/crypto/toucan?status.svg)](https://godoc.org/github.com/penguingovernor/toucan/crypto)
 [![Go Report Card](https://goreportcard.com/badge/github.com/PenguinGovernor/toucan)](https://goreportcard.com/report/github.com/PenguinGovernor/toucan)
 
+## API Installation
 
-## Installation
+Grab the `toucan/crypto` package using `go get`
+
+```shell
+go get github.com/penguingovernor/toucan/crypto
+```
+
+See the above `godoc` badge for the API specification.
+
+## CLI Installation
 
 ### Universal
 
@@ -21,7 +31,6 @@ Install appropriate version from the [release page](https://github.com/penguingo
 2. Run go build
 
 `go build`
-
 
 ### Usage
 
@@ -64,7 +73,6 @@ For practical purpose, consider an IV as a secondary key that doesn't have to be
 
 Use a cryptographically secure pseudo random number generator!
 
-
 Linux/MacOS:
 
 ```bash
@@ -87,6 +95,7 @@ Download a POSIX shell like [git bash](https://git-scm.com/) and repeat above st
 #### How can I use standard input?
 
 Linux/MacOS:
+
 ```bash
 echo -n "key" | toucan encrypt file /dev/stdin IV file.out
 echo -n "key" | toucan decrypt file.out /dev/stdin IV file.decrypted
